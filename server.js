@@ -1,0 +1,26 @@
+const express = require('express')
+const server = express()
+const fetch = require('node-fetch')
+const PORT = process.env.PORT || 3000
+
+server.set('json spaces', 2)
+server.get('*', async (req, res) => {
+   res.json({
+      online: true,
+      msg: `Server berjalan pada port ${PORT}`,
+      server: await (await fetch('http://ip-api.com/json')).json()
+   })
+})
+
+server.listen(PORT, () => {
+   keepAlive()
+   console.log(`Server berjalan pada port ${PORT}!`)
+})
+
+function keepAlive() {
+   let url = `https://${process.env.REPL_SLUG}.${process.env.REPL_OWNER}.repl.co`
+   if (/(\/\/|\.)undefined\./.test(url)) return
+   setInterval(() => {
+      fetch(url).catch(console.log)
+   }, 30 * 1000)
+}
