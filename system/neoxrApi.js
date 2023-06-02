@@ -187,4 +187,12 @@ module.exports = class NeoxrApi {
       let json = await Func.fetchJson(this.baseUrl + '/spotify?url=' + url + '&apikey=' + this.apiKey)
       return json
    }
+   remini = async (image) => {
+      let json = await Func.fetchJson(this.baseUrl + '/remini?image=' + image + '&apikey=' + this.apiKey)
+      return json
+   }
+   nobg = async (image) => {
+      let json = await Func.fetchJson(this.baseUrl + '/nobg?image=' + image + '&apikey=' + this.apiKey)
+      return json
+   }
 }
